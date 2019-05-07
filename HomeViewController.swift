@@ -113,11 +113,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 }
 
 class User {
+    init () {
+        self.name = "Name"
+        self.tokens = 0
+        self.events = [Event]();
+    }
+    var name:String;
     var tokens:Int;
     var events:[Event];
 }
 
 class Event {
+    init() {
+        self.name = "EventName"
+        self.location = CLLocation()
+        self.tokens = 2
+        self.startDate = Date()
+        self.endDate = Date()
+    }
     var name: String;
     var location:CLLocation;
     var tokens:Int;
