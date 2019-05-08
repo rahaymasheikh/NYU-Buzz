@@ -1,4 +1,3 @@
-//
 //  HomeViewController.swift
 //  NYUBuzz_LocationProj
 //
@@ -13,14 +12,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     //////////////////////////////
     // VARIABLES
     //////////////////////////////
+    
     let locationManager = CLLocationManager();  // we use locationManager to retrieve location info
     let geoCoder = CLGeocoder(); // we use geoCoder to convert coordinates to an address
     let addressDist: Double = 1000;      // distance in meters for two CLLocations to be within each other to be considered the same address
-    var user: User;
+    var user: User = User();
     
     //////////////////////////////
     // METHODS
     //////////////////////////////
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self;
@@ -128,8 +129,13 @@ class Event {
         self.name = "EventName"
         self.location = CLLocation()
         self.tokens = 2
-        self.startDate = Date()
-        self.endDate = Date()
+        
+        // always have startDate be yesterday, endDate be tomorrow!
+        let currentDate = Date()
+        let yesterday: Date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        let tomorrow: Date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        self.startDate = yesterday
+        self.endDate = tomorrow
     }
     var name: String;
     var location:CLLocation;
