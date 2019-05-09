@@ -45,7 +45,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         var matchingEventInd: Int?
         for (index, event) in user.events.enumerated() {
             if (atLocation.distance(from: event.location) <= addressDist) {
-                if (event.startDate <= onDate && event.endDate <= event.endDate) {
+                if (event.startDate <= onDate && onDate <= event.endDate) {
                     matchingEvent = event
                     matchingEventInd = index
                     break;
@@ -111,6 +111,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         else {
             print("ERROR: lacking correct locAuthZ status!")
         }
+        
+        // DEBUG:
+        print("User loc is \(locations.first)")
     }
     
     // catches any errors thrown by locationManager calls
@@ -133,15 +136,17 @@ class User {
 class Event {
     init() {
         self.name = "EventName"
-        self.location = CLLocation()
+        self.location = CLLocation(latitude: 37.78583400, longitude: -122.40641700)
         self.tokens = 2
         
         // always have startDate be yesterday, endDate be tomorrow!
         let currentDate = Date()
-        let yesterday: Date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        let yesterday: Date = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
         let tomorrow: Date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
         self.startDate = yesterday
+        print("startDate = \(self.startDate)")
         self.endDate = tomorrow
+        print("endDate = \(self.endDate)")
     }
     var name: String;
     var location:CLLocation;
