@@ -45,7 +45,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         var matchingEventInd: Int?
         for (index, event) in user.events.enumerated() {
             if (atLocation.distance(from: event.location) <= addressDist) {
-                if (event.startDate <= onDate && onDate <= event.endDate) {
+                if (getDate(fromDateStr: event.startDate)  <= onDate && onDate <= getDate(fromDateStr: event.endDate)) {
                     matchingEvent = event
                     matchingEventInd = index
                     break;
@@ -158,14 +158,12 @@ class Event {
         let currentDate = Date()
         let yesterday: Date = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
         let tomorrow: Date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-        self.startDate = yesterday
-        print("startDate = \(self.startDate)")
-        self.endDate = tomorrow
-        print("endDate = \(self.endDate)")
+        self.startDate = "\(yesterday)"
+        self.endDate = "\(tomorrow)"
     }
     var name: String;
     var location:CLLocation;
     var tokens:Int;
-    var startDate:Date;
-    var endDate:Date;
+    var startDate:String;
+    var endDate:String;
 }
