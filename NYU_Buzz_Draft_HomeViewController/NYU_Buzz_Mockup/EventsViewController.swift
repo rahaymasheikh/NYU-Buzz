@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventsViewController: UIViewController {
     
     /////////////////////
     // VARIABLES
@@ -17,6 +17,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBOutlet weak var eventsTableView: UITableView!
+    /*
     let cellReuseId = "cell"
     var allEvents: [Event] = [Event(), Event(), Event()]
 
@@ -57,6 +58,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+    */
     */
 
 }

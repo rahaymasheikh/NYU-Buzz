@@ -36,6 +36,7 @@
 		D6FAE71F227C114C00F8A418 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6FAE722227CD73C00F8A418 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F92B735D22808132009D510B /* Events_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events_TableViewCell.swift; sourceTree = "<group>"; };
+		F9E22F02228432E500C413E5 /* palladiumloc.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = palladiumloc.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		D6F5ADAC225D1DFB006E077F = {
 			isa = PBXGroup;
 			children = (
+				F9E22F02228432E500C413E5 /* palladiumloc.gpx */,
 				D6F5ADB7225D1DFC006E077F /* NYU_Buzz_Mockup */,
 				D6F5ADB6225D1DFC006E077F /* Products */,
 			);

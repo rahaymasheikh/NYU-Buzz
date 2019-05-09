@@ -12,10 +12,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     //////////////////////////////
     // VARIABLES
     //////////////////////////////
+    
+    // dictionary of locationName:long/latitude
+    var nyuLocDict: [String: CLLocation] = [
+        "Palladium": CLLocation(latitude: 40.733248, longitude: -73.988425),
+        "Kimmel": CLLocation(latitude: 40.730014, longitude: -73.997782),
+        "Courant": CLLocation(latitude: 40.728691764898265, longitude: -73.99566113948822)
+    ]
+
     @IBOutlet weak var tokensLabel: UILabel!
     let locationManager = CLLocationManager();  // we use locationManager to retrieve location info
     let geoCoder = CLGeocoder(); // we use geoCoder to convert coordinates to an address
-    let addressDist: Double = 1000;      // distance in meters for two CLLocations to be within each other to be considered the same address
+    let addressDist: Double = 200;      // distance in meters for two CLLocations to be within each other to be considered the same address
     var user: User = User();
     
     //////////////////////////////
@@ -44,7 +52,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         var matchingEvent: Event?
         var matchingEventInd: Int?
         for (index, event) in user.events.enumerated() {
-            if (atLocation.distance(from: event.location) <= addressDist) {
+            var eventCLLoc: CLLocation = nyuLocDict[event.location]!
+            if (eventCLLoc == nil) {
+                print("ERROR: couldn't find that location in nyuLocDict!")
+            }
+            if (atLocation.distance(from: eventCLLoc) <= addressDist) {
                 if (getDate(fromDateStr: event.startDate)  <= onDate && onDate <= getDate(fromDateStr: event.endDate)) {
                     matchingEvent = event
                     matchingEventInd = index
@@ -141,7 +153,7 @@ class User {
     init () {
         self.name = "Name"
         self.tokens = 0
-        self.events = [Event(), Event(), Event()];
+        self.events = [Event(atLocation: "Palladium"), Event(atLocation: "Courant"), Event(atLocation: "Kimmel")];
     }
     var name:String;
     var tokens:Int;
@@ -149,9 +161,9 @@ class User {
 }
 
 class Event {
-    init() {
+    init(atLocation: String) {
         self.name = "EventName"
-        self.location = CLLocation(latitude: 37.78583400, longitude: -122.40641700)
+        self.location = atLocation
         self.tokens = 2
         
         // always have startDate be yesterday, endDate be tomorrow!
@@ -162,7 +174,7 @@ class Event {
         self.endDate = "\(tomorrow)"
     }
     var name: String;
-    var location:CLLocation;
+    var location:String;
     var tokens:Int;
     var startDate:String;
     var endDate:String;
