@@ -89,6 +89,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // rets date obj from a string w military format
+    func getDate(fromDateStr: String) -> Date {
+        // create a DateFormatter with correct date format
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        
+        guard let dateFromStr = dateFormatter.date(from: fromDateStr) else {
+            fatalError()
+        }
+        
+        return dateFromStr
+    }
+    
     //////////////////////////////
     // DELEGATE MTDS FOR LOCMANAGER
     //////////////////////////////
